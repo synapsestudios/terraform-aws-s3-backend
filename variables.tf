@@ -15,7 +15,7 @@ variable "principal_arns" {
   default     = []
 }
 
-varaible "tags" {
+variable "tags" {
   type        = map(string)
   description = "Tags to apply to the resources"
   default     = {}
