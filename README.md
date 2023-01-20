@@ -24,7 +24,7 @@ module "s3_backend" {
 
 ### Example of usage utilizing KMS encryption:
 
-:warning: **If you enable kms encryption, you must provide a list of principal ARNs that will be granted access to the KMS key. All users added to this will have full access over the provisioned key** :warning:
+:warning: **Enabling KMS requires a list of principal ARNs that will be granted access to the KMS key. All users added to this will have full access over the provisioned key** :warning:
 
 ```hcl
 module "s3_backend" {
