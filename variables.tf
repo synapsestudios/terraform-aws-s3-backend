@@ -22,6 +22,6 @@ variable "tags" {
 }
 
 variable "region" {
-  type = string
+  type        = string
   description = "The AWS Region to place the resources in"
 }
