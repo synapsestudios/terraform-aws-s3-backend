@@ -20,8 +20,3 @@ variable "tags" {
   description = "Tags to apply to the resources"
   default     = {}
 }
-
-variable "region" {
-  type        = string
-  description = "The AWS Region to place the resources in"
-}
