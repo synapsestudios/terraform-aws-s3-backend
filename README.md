@@ -86,7 +86,6 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix) | The name to give the bucket where the statefile will be stored (Must be 32 characters or less) | `string` | n/a | yes |
 | <a name="input_principal_arns"></a> [principal\_arns](#input\_principal\_arns) | List of ARNs to grant access to the KMS key (if use\_kms is true) | `list(string)` | `[]` | no |
-| <a name="input_region"></a> [region](#input\_region) | The AWS Region to place the resources in | `string` | n/a | yes |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resources | `map(string)` | `{}` | no |
 | <a name="input_use_kms"></a> [use\_kms](#input\_use\_kms) | Whether to use KMS encryption or not | `bool` | `false` | no |
 
