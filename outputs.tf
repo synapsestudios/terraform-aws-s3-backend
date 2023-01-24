@@ -1,5 +1,5 @@
 output "kms_key_id" {
-  value       = aws_kms_key.this[0].key_id
+  value       = length(aws_kms_key.this) > 0 ? aws_kms_key.this[*].key_id : null
   description = "The provisioned KMS key id"
 }
 
