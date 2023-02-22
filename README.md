@@ -84,7 +84,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_bucket_prefix"></a> [bucket\_prefix](#input\_bucket\_prefix) | The name to give the bucket where the statefile will be stored (Must be 32 characters or less) | `string` | n/a | yes |
+| <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The name to give the bucket and Dynamo table where the statefile and locks will be stored (Must be 23 characters or less) | `string` | n/a | yes |
 | <a name="input_principal_arns"></a> [principal\_arns](#input\_principal\_arns) | List of ARNs to grant access to the KMS key (if use\_kms is true) | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resources | `map(string)` | `{}` | no |
 | <a name="input_use_kms"></a> [use\_kms](#input\_use\_kms) | Whether to use KMS encryption or not | `bool` | `false` | no |
@@ -93,6 +93,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_dynamo_table_name"></a> [dynamo\_table\_name](#output\_dynamo\_table\_name) | The name of the dynamoDB table |
 | <a name="output_kms_key_id"></a> [kms\_key\_id](#output\_kms\_key\_id) | The provisioned KMS key id |
 | <a name="output_s3_bucket_id"></a> [s3\_bucket\_id](#output\_s3\_bucket\_id) | The name of the s3 terraform backend bucket |
 <!-- END_TF_DOCS -->

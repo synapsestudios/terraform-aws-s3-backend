@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "this-logs" {
-  bucket_prefix = "${var.bucket_prefix}-logs"
+  bucket_prefix = "${var.name_prefix}-tf-state-logs"
   tags          = var.tags
 }
 

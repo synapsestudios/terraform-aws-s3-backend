@@ -1,5 +1,5 @@
 resource "aws_dynamodb_table" "this" {
-  name         = "terraform_state_lock"
+  name         = aws_s3_bucket.this.bucket
   hash_key     = "LockID"
   billing_mode = "PAY_PER_REQUEST"
 
