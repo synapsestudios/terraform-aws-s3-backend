@@ -12,11 +12,6 @@ resource "aws_s3_bucket_public_access_block" "this-logs" {
   restrict_public_buckets = true
 }
 
-resource "aws_s3_bucket_acl" "this-logs" {
-  bucket = aws_s3_bucket.this-logs.id
-  acl    = "private"
-}
-
 resource "aws_s3_bucket_server_side_encryption_configuration" "this-logs" {
   bucket = aws_s3_bucket.this-logs.id
 
