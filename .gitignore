@@ -1,6 +1,9 @@
 # Local .terraform directories
 **/.terraform/*
 
+# Dependency lock file — this is a shared module, consumers pin their own versions
+.terraform.lock.hcl
+
 # .tfstate files
 *.tfstate
 *.tfstate.*

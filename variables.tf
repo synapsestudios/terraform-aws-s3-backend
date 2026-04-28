@@ -1,6 +1,6 @@
 variable "name_prefix" {
   type        = string
-  description = "The name to give the bucket and Dynamo table where the statefile and locks will be stored (Must be 23 characters or less)"
+  description = "The name prefix to give the bucket where the statefile and lockfile will be stored (Must be 23 characters or less)"
 }
 
 variable "use_kms" {
