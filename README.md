@@ -43,7 +43,7 @@ terraform {
 
 ### Example of usage utilizing KMS encryption:
 
-:warning: **Enabling KMS requires a list of principal ARNs that will be granted access to the KMS key. All users added to this will have full access over the provisioned key** :warning:
+:warning: **Enabling KMS requires a non-empty `principal_arns` list. Each ARN is granted both administrative and data-plane access to the provisioned key (i.e. they can manage the key *and* encrypt/decrypt state files with it). The AWS account root retains full access via the standard lockout-protection statement.** :warning:
 
 ```hcl
 module "s3_backend" {
@@ -114,14 +114,14 @@ No modules.
 | [aws_s3_bucket_server_side_encryption_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.this-logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [aws_s3_bucket_versioning.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_versioning) | resource |
-| [aws_iam_policy_document.kms_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
+| [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | The name prefix to give the bucket where the statefile and lockfile will be stored (Must be 23 characters or less) | `string` | n/a | yes |
-| <a name="input_principal_arns"></a> [principal\_arns](#input\_principal\_arns) | List of ARNs to grant access to the KMS key (if use\_kms is true) | `list(string)` | `[]` | no |
+| <a name="input_principal_arns"></a> [principal\_arns](#input\_principal\_arns) | List of ARNs granted administrative and data-plane access to the KMS key. Required (non-empty) when use\_kms is true. | `list(string)` | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to apply to the resources | `map(string)` | `{}` | no |
 | <a name="input_use_kms"></a> [use\_kms](#input\_use\_kms) | Whether to use KMS encryption or not | `bool` | `false` | no |
 

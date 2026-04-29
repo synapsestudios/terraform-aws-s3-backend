@@ -11,8 +11,13 @@ variable "use_kms" {
 
 variable "principal_arns" {
   type        = list(string)
-  description = "List of ARNs to grant access to the KMS key (if use_kms is true)"
+  description = "List of ARNs granted administrative and data-plane access to the KMS key. Required (non-empty) when use_kms is true."
   default     = []
+
+  validation {
+    condition     = !var.use_kms || length(var.principal_arns) > 0
+    error_message = "principal_arns must contain at least one ARN when use_kms is true."
+  }
 }
 
 variable "tags" {
