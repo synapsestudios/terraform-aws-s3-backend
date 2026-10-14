@@ -65,6 +65,12 @@ module "s3_backend" {
 }
 ```
 
+## HTTPS only
+
+Both buckets carry a bucket policy that denies every S3 request made without TLS (`aws:SecureTransport` is `false`). Terraform and the AWS CLI already use HTTPS, so this changes nothing for them.
+
+A bucket holds one policy. A caller that attaches its own `aws_s3_bucket_policy` to either bucket replaces this one, and the two resources overwrite each other on every apply. Remove that resource before upgrading.
+
 ## Migrating from DynamoDB-based locking
 
 Earlier versions of this module provisioned an `aws_dynamodb_table` and exposed
@@ -109,6 +115,8 @@ No modules.
 | [aws_s3_bucket.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket.this-logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
 | [aws_s3_bucket_logging.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_logging) | resource |
+| [aws_s3_bucket_policy.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_policy.this-logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
 | [aws_s3_bucket_public_access_block.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_public_access_block.this-logs](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_public_access_block) | resource |
 | [aws_s3_bucket_server_side_encryption_configuration.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |

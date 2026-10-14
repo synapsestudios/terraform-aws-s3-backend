@@ -47,3 +47,41 @@ run "kms_requires_principal_arns" {
     var.principal_arns,
   ]
 }
+
+run "buckets_deny_requests_without_tls" {
+  command = apply
+
+  assert {
+    condition = jsondecode(aws_s3_bucket_policy.this.policy).Statement == [{
+      Sid       = "DenyInsecureTransport"
+      Effect    = "Deny"
+      Principal = "*"
+      Action    = "s3:*"
+      Resource  = [aws_s3_bucket.this.arn, "${aws_s3_bucket.this.arn}/*"]
+      Condition = { Bool = { "aws:SecureTransport" = "false" } }
+    }]
+    error_message = "the state bucket policy must deny every s3 action on aws_s3_bucket.this.arn and its objects when aws:SecureTransport is false, and nothing else"
+  }
+
+  assert {
+    condition     = aws_s3_bucket_policy.this.bucket == aws_s3_bucket.this.id
+    error_message = "aws_s3_bucket_policy.this must attach to aws_s3_bucket.this"
+  }
+
+  assert {
+    condition = jsondecode(aws_s3_bucket_policy.this-logs.policy).Statement == [{
+      Sid       = "DenyInsecureTransport"
+      Effect    = "Deny"
+      Principal = "*"
+      Action    = "s3:*"
+      Resource  = [aws_s3_bucket.this-logs.arn, "${aws_s3_bucket.this-logs.arn}/*"]
+      Condition = { Bool = { "aws:SecureTransport" = "false" } }
+    }]
+    error_message = "the logs bucket policy must deny every s3 action on aws_s3_bucket.this-logs.arn and its objects when aws:SecureTransport is false, and nothing else"
+  }
+
+  assert {
+    condition     = aws_s3_bucket_policy.this-logs.bucket == aws_s3_bucket.this-logs.id
+    error_message = "aws_s3_bucket_policy.this-logs must attach to aws_s3_bucket.this-logs"
+  }
+}
