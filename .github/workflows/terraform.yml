@@ -7,6 +7,8 @@ on:
       - "**"
 
 jobs:
+  fast-checks:
+    uses: ./.github/workflows/fast_checks.yml
   terraform-format-test:
     uses: ./.github/workflows/terraform_format.yml
   terraform-unit-test:
